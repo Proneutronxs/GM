@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="es">
+{% load static %}
+
+<head>
+    <title>GM</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{%static 'GM/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="main-header">
+            <div class="container">
+                <div class="logo-wrap" itemprop="logo">
+                    <!-- <<img src="images/site-logo.jpg" alt="Logo Image" style="height: 5em;">
+					h1>Education</h1> -->
+                </div>
+                <div class="nav-wrap">
+                    <nav class="nav-desktop">
+                        <ul class="menu-list">
+                            <li><a href="{% url 'inicio_gm' %}">Inicio</a></li>
+                            <li class="menu-parent">Cuentas
+                                <ul class="sub-menu">
+                                    <li><a href="#">Child</a></li>
+                                    <li><a href="#">Child</a></li>
+                                    <li class="menu-parent">Child
+                                        <ul class="sub-menu">
+                                            <li><a href="">Grand-child</a></li>
+                                            <li><a href="">Grand-child</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'ver_plus' %}">Plus</a></li>
+                            <li class="menu-parent">Varios
+                                <ul class="sub-menu">
+                                    <li><a href="#">Child</a></li>
+                                    <li class="menu-parent">Child
+                                        <ul class="sub-menu">
+                                            <li><a href="">Grand-child</a></li>
+                                            <li><a href="">Grand-child</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'logout' %}">{{user.username.upper}}</a></li>
+                        </ul>
+                    </nav>
+                    <div id="bar">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <div id="close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-general">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <div id="popup" class="popup">
+        <span class="close" id="closePopup">&times;</span>
+        <div id="mensaje-pop-up">
+
+        </div>
+    </div>
+
+</body>
+
+</html>

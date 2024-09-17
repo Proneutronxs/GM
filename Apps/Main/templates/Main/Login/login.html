@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+
+<head>
+    <title>GM</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{%static 'GM/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container-general">
+        <div class="login-form">
+            <div class="div-login-form">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password">
+                <button type="submit" id="login-button">Iniciar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <span class="close" id="closePopup">&times;</span>
+        <div id="mensaje-pop-up">
+
+        </div>
+    </div>
+
+    <!-- <script type="text/javascript" src="{%static 'GM/js/custom.js' %}"></script> -->
+    <script type="text/javascript" src="{%static 'GM/js/login.js' %}"></script>
+</body>
+
+</html>

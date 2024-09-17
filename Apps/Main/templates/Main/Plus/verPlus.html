@@ -1,0 +1,77 @@
+{% extends "Main/Main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-verPlus">
+    <div class="vr-encabezado">
+        <div class="vr-fila-1">
+            <div class="vr-col-8">
+                <div class="vr-fecha-desde">
+                    <span>Desde:</span>
+                    <input type="date" onclick="this.showPicker();" id="vr-fecha-desde" class="vr-input">
+                </div>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_comercio" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE COMERCIO</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_cliente" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE CLIENTE</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_barco" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE BARCO</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <button class="vr-button">Buscar</button>
+            </div>
+        </div>
+        <div class="vr-fila-2">
+            <div class="vr-col-8">
+                <div class="vr-fecha-hasta">
+                    <span>Hasta:</span>
+                    <input type="date" onclick="this.showPicker();" id="vr-fecha-hasta" class="vr-input">
+                </div>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_especie" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE ESPECIE</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_variedad" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE VARIEDAD</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_envase" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE ENVASE</option>
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_marca" class="choices_inner vr-select">
+                    <option value="" selected disabled>SELECCIONE MARCA</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="items-formulario">
+        <select id="selector_legajos" class="choices_inner" data-placeholder="SELECCIONE UN LEGAJO">
+            <option value="" selected disabled>SELECCIONE ESPECIE</option>
+        </select>
+    </div> -->
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="{%static 'GM/js/verPlus/verPlus.js' %}"></script>
+
+{% endblock %}
