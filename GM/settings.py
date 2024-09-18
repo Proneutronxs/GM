@@ -75,16 +75,16 @@ WSGI_APPLICATION = 'GM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'DJANGOGM',
-#         'USER': 'admindb',
-#         'HOST': 'localhost',
-#         'PASSWORD': 'Sskvi$%$%1722',
-#         'PORT': '3306',
-#     },
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DJANGOGM',
+        'USER': 'admindb',
+        'HOST': 'localhost',
+        'PASSWORD': 'Sskvi$%$%1722',
+        'PORT': '3306',
+    },
+}
 
 
 # Password validation
