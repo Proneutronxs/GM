@@ -13,7 +13,9 @@
 </head>
 
 <body>
-
+    <div class="loading-container" id="loading-container">
+        <img src="{% static 'GM/images/loading.gif' %}" alt="Cargando...">
+    </div>
     <header class="site-header">
         <div class="main-header">
             <div class="container">
@@ -25,7 +27,7 @@
                     <nav class="nav-desktop">
                         <ul class="menu-list">
                             <li><a href="{% url 'inicio_gm' %}">Inicio</a></li>
-                            <li class="menu-parent">Cuentas
+                            <!-- <li class="menu-parent">Cuentas
                                 <ul class="sub-menu">
                                     <li><a href="#">Child</a></li>
                                     <li><a href="#">Child</a></li>
@@ -36,9 +38,9 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
-                            <li><a href="{% url 'ver_plus' %}">Plus</a></li>
-                            <li class="menu-parent">Varios
+                            </li> -->
+                            <li><a href="{% url 'ver_plus' %}">CRC</a></li>
+                            <!-- <li class="menu-parent">Varios
                                 <ul class="sub-menu">
                                     <li><a href="#">Child</a></li>
                                     <li class="menu-parent">Child
@@ -48,7 +50,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li><a href="{% url 'logout' %}">{{user.username.upper}}</a></li>
                         </ul>
                     </nav>
@@ -63,6 +65,8 @@
         </div>
     </header>
 
+
+
     <div class="container-general">
         {% block content %}
 
@@ -75,6 +79,7 @@
 
         </div>
     </div>
+
 
 </body>
 

@@ -84,6 +84,14 @@ DATABASES = {
         'PASSWORD': 'Sskvi$%$%1722',
         'PORT': '3306',
     },
+    'GM': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'GM',
+        'USER': 'admindb',
+        'HOST': 'localhost',
+        'PASSWORD': 'Sskvi$%$%1722',
+        'PORT': '3306',
+    },
 }
 
 

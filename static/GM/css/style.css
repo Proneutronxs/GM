@@ -557,6 +557,7 @@ li {
 	position: relative;
 	font-size: 16px;
 	width: 100%;
+	height: 26px;
 }
 
 /* Estilo del campo cuando está cerrado */
@@ -567,6 +568,10 @@ li {
 	cursor: pointer;
 	transition: all 0.3s ease;
 	width: 100%;
+	height: 100%;
+    overflow: hidden; /* Evita que el contenido salga del div */
+    white-space: nowrap; /* Evita saltos de línea */
+    text-overflow: ellipsis; 
 }
 
 /* Sombra en el campo cuando el desplegable está abierto */
@@ -594,6 +599,9 @@ li {
 	border-radius: 4px;
 	border: 1px solid #ddd;
 	font-size: 14px;
+    overflow: hidden; /* Evita que el contenido salga del div */
+    white-space: nowrap; /* Evita saltos de línea */
+    text-overflow: ellipsis; 
 }
 
 /* Estilo del botón para eliminar los ítems seleccionados */
@@ -680,7 +688,7 @@ li {
 	border-bottom-left-radius: 2.5px;
 	border-bottom-right-radius: 2.5px;
 	font-size: 12px;
-	overflow: hidden;
+	overflow: auto;
 	z-index: 999;
 	will-change: visibility;
 	visibility: hidden;
@@ -715,13 +723,9 @@ li {
 	width: 100%;
 	max-width: 100%;
 	max-height: 100%;
-	/* background-color: aquamarine; */
 	overflow: hidden;
-	/* Oculta el contenido que se sale del contenedor */
 	position: relative;
-	/* Establece la posición relativa para que los elementos hijos se comporten correctamente */
 	contain: content;
-	/* Contiene el contenido dentro del contenedor */
 }
 
 .items-formulario {
@@ -733,7 +737,7 @@ li {
 	background-color: #f9f9f9;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 10px;
+	padding: 4px;
 }
 
 .vr-fila-1 {
@@ -810,3 +814,163 @@ li {
 .vr-fecha-hasta span {
 	margin-right: 10px;
 }
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.loading-container img {
+    width: 170px;
+    height: 200px;
+}
+
+
+.vr-contenedor-data {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	padding: 8px;
+}
+
+.vr-tb-table tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.vr-tb-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.vr-tb-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.vr-tb-table td {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 6px;
+	font-size: 12px;
+}
+
+.vr-tb-table td:first-child {
+    border-left: none;
+}
+
+.vr-tb-table td:last-child {
+    border-right: none;
+}
+
+
+
+.vr-datos-encabezado {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.vr-datos-encabezado-item {
+    margin-left: 8px;
+	font-size: 16px;
+}
+
+.vr-datos-encabezado-item:first-child {
+    margin-left: 0;
+}
+
+.vr-datos-crc {
+    color: black;
+}
+
+.vr-datos-importe {
+    color: black;
+}
+
+.vr-datos-general {
+    color: black;
+}
+
+
+.vr-datos-tabla {
+	margin-top: 5px;
+    overflow-y: auto;
+    height: calc(100% - 10px); 
+}
+
+
+.vr-tb-header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #add8e698;
+	font-weight: bold;
+	margin-top: 15px;
+}
+.vr-tb-header-main {
+	font-size: 18px;
+}
+.vr-tb-summary {
+	font-size: 16px;
+}
+table.vr-tb-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+th.vr-tb-header, td.vr-tb-cell {
+	border: 1px solid #000;
+	padding: 4px;
+	text-align: center;
+}
+th.vr-tb-header {
+	background-color: #d4eac5;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

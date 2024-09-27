@@ -14,22 +14,19 @@
                 </div>
             </div>
             <div class="vr-col-2">
-                <select id="selector_comercio" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE COMERCIO</option>
+                <select id="selector_mercado" class="choices_inner vr-select">
                 </select>
             </div>
             <div class="vr-col-2">
                 <select id="selector_cliente" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE CLIENTE</option>
                 </select>
             </div>
             <div class="vr-col-2">
-                <select id="selector_barco" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE BARCO</option>
+                <select id="selector_especie" class="choices_inner vr-select">
                 </select>
             </div>
             <div class="vr-col-2">
-                <button class="vr-button">Buscar</button>
+                <button class="vr-button" id="busqueda-button">Buscar</button>
             </div>
         </div>
         <div class="vr-fila-2">
@@ -40,38 +37,36 @@
                 </div>
             </div>
             <div class="vr-col-2">
-                <select id="selector_especie" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE ESPECIE</option>
-                </select>
-            </div>
-            <div class="vr-col-2">
                 <select id="selector_variedad" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE VARIEDAD</option>
-                </select>
-            </div>
-            <div class="vr-col-2">
-                <select id="selector_envase" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE ENVASE</option>
                 </select>
             </div>
             <div class="vr-col-2">
                 <select id="selector_marca" class="choices_inner vr-select">
-                    <option value="" selected disabled>SELECCIONE MARCA</option>
                 </select>
+            </div>
+            <div class="vr-col-2">
+                <select id="selector_envase" class="choices_inner vr-select">
+                </select>
+            </div>
+            <div class="vr-col-2">
+                <!-- <select id="selector_vapor" class="choices_inner vr-select">
+                    <option value="0" selected disabled>SELECCIONE VAPOR</option>
+                </select> -->
             </div>
         </div>
     </div>
-    <!-- <div class="items-formulario">
-        <select id="selector_legajos" class="choices_inner" data-placeholder="SELECCIONE UN LEGAJO">
-            <option value="" selected disabled>SELECCIONE ESPECIE</option>
-        </select>
-    </div> -->
 
+    <div class="vr-contenedor-data">
+        <div class="vr-datos-encabezado" id="id-vr-datos-totales">
 
-</div>
+        </div>
+        <div class="vr-datos-tabla" id="id-contenedor-empresas">
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="{%static 'GM/js/verPlus/verPlus.js' %}"></script>
+    </div>
 
-{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{%static 'GM/js/verPlus/verPlus.js' %}"></script>
+
+    {% endblock %}
