@@ -6,6 +6,7 @@ const especie = document.getElementById("selector_especie");
 const variedad = document.getElementById("selector_variedad");
 const envase = document.getElementById("selector_envase");
 const marca = document.getElementById("selector_marca");
+const calibres = document.getElementById("selector_calibres");
 const loadingContainer = document.getElementById('loading-container');
 
 
@@ -46,6 +47,11 @@ selector_envase.addEventListener("change", (event) => {
 });
 
 selector_marca.addEventListener("change", (event) => {
+    document.getElementById('id-contenedor-empresas').innerHTML = ``;
+    document.getElementById('id-vr-datos-totales').innerHTML = ``;
+});
+
+selector_calibres.addEventListener("change", (event) => {
     document.getElementById('id-contenedor-empresas').innerHTML = ``;
     document.getElementById('id-vr-datos-totales').innerHTML = ``;
 });
@@ -94,12 +100,16 @@ const choiceEnvase = new Choices('#selector_envase', {
     itemSelectText: ''
 });
 
-// const choiceVapor = new Choices('#selector_vapor', {
-//     allowHTML: true,
-//     shouldSort: false,
-//     searchPlaceholderValue: 'Escriba para buscar..',
-//     itemSelectText: ''
-// });
+const choiceCalibre = new Choices('#selector_calibres', {
+    allowHTML: true,
+    shouldSort: false,
+    removeItemButton: true,
+    itemSelectText: '',
+    maxItemCount: 4,
+    placeholderValue: 'SELECCIONE CALIBRES',
+    searchPlaceholderValue: 'Escriba para buscar..',
+    itemSelectText: ''
+});
 
 const choiceVariedad = new Choices('#selector_variedad', {
     allowHTML: true,
@@ -143,12 +153,12 @@ const listarDataInicial = async () => {
             });
             choiceMarca.setChoices(result2, 'value', 'label', true);
 
-            // let result3 = [];
-            // result3.push();
-            // data.DataVapor.forEach((datos) => {
-            //     result3.push({ value: datos.IdVapor, label: datos.Descripcion });
-            // });
-            // choiceVapor.setChoices(result3, 'value', 'label', true);
+            let result3 = [];
+            result3.push();
+            data.DataCalibres.forEach((datos) => {
+                result3.push({ value: datos.IdCalibre, label: datos.Calibre});
+            });
+            choiceCalibre.setChoices(result3, 'value', 'label', true);
         } else {
             var nota = data.Nota
             var color = "red";
@@ -161,7 +171,7 @@ const listarDataInicial = async () => {
     }
 }
 
-const dataSubItems = async (Tipo,IdElemento, PlaceHolder) => {
+const dataSubItems = async (Tipo,IdElemento) => {
     try {
         const formData = new FormData();
         
@@ -230,6 +240,7 @@ const buscarCRC = async () => {
         formData.append("Variedad", getValueVariedad());
         formData.append("Envase", getValueEnvase());
         formData.append("Marca", getValueMarca());
+        formData.append("Calibres", getValueCalibres());
         const options = {
             method: 'POST',
             headers: {
@@ -258,19 +269,15 @@ const buscarCRC = async () => {
                         <thead>
                             <tr>
                                 <th class="vr-tb-header">FECHA</th>
-                                <th class="vr-tb-header">MERCADO</th>
-                                <th class="vr-tb-header">DESTINO</th>
                                 <th class="vr-tb-header">ESPECIE</th>
                                 <th class="vr-tb-header">VARIEDAD</th>
                                 <th class="vr-tb-header">ENVASE</th>
                                 <th class="vr-tb-header">MARCA</th>
-                                <th class="vr-tb-header">CALIBRES</th>
-                                <th class="vr-tb-header">PESO ENV.</th>
-                                <th class="vr-tb-header">TOTAL KG.</th>
+                                <th class="vr-tb-header">CALIBRE</th>
                                 <th class="vr-tb-header">BULTOS</th>
                                 <th class="vr-tb-header">IMP. UNI.</th>
-                                <th class="vr-tb-header">IMP. TOTAL</th>
                                 <th class="vr-tb-header">IMP. CRC</th>
+                                <th class="vr-tb-header">IMP. TOTAL</th>
                             </tr>
                         </thead>
                         <tbody id="id-tbody-${empresa.Nombre}">
@@ -282,19 +289,15 @@ const buscarCRC = async () => {
                     const filaTabla = `
                         <tr>
                             <td>${dato.FechaFac}</td>
-                            <td>${dato.Mercado}</td>
-                            <td>${dato.Destino}</td>
                             <td>${dato.Especie}</td>
                             <td>${dato.Variedad}</td>
                             <td>${dato.Envase}</td>
                             <td>${dato.Marca}</td>
-                            <td>${dato.Calibres}</td>
-                            <td>${dato.PesoEnvase}</td>
-                            <td>${dato.TotalKG}</td>
-                            <td>${dato.CantBultos}</td>
-                            <td>${dato.ImporteUnitario}</td>
-                            <td>${formatoMonedaTexto(dato.ImporteTotal)}</td>
-                            <td>${formatoMonedaTexto(dato.ImporteCRCTotal)}</td>
+                            <td>${dato.Calibre}</td>
+                            <td>${dato.Cantidad}</td>
+                            <td>${formatoMonedaTexto(dato.ImporteUnitario)}</td>
+                            <td>${formatoMonedaTexto((multiplicar(dato.CRC,dato.Cantidad)).toString())}</td>
+                            <td>${formatoMonedaTexto((multiplicar(dato.Cantidad,dato.ImporteUnitario)).toString())}</td>
                         </tr>
                     `;
                     document.getElementById(`id-tbody-${empresa.Nombre}`).innerHTML += filaTabla;
@@ -315,6 +318,8 @@ const buscarCRC = async () => {
             `;
             document.getElementById('id-vr-datos-totales').innerHTML = datosTotales;
         } else {
+            document.getElementById('id-contenedor-empresas').innerHTML = ``;
+            document.getElementById('id-vr-datos-totales').innerHTML = ``;
             var nota = data.Nota
             var color = "red";
             mostrarInfo(nota, color);
@@ -347,15 +352,29 @@ function getValueMarca() {
     return choiceMarca.getValue() ? choiceMarca.getValue().value : '0';
 }
 
+function getValueCalibres() {
+    const calibres = document.getElementById("selector_calibres");
+    const selectedCalibres = Array.from(calibres.selectedOptions).map(option => option.value);
+    if (selectedCalibres.length === 0) {
+        return [0];
+    }
+    if (selectedCalibres.includes("0")) {
+        return [0];
+    }
+    return selectedCalibres;
+}
+
 function formatoMonedaTexto(texto) {
     const num = parseFloat(texto.replace(/[^0-9.-]/g, ''));
     if (isNaN(num)) {
       return '-';
     }
-    return `U$S ${num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+    return `U$S ${num.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-
+function multiplicar(num1, num2) {
+    return num1 * num2;
+}
 
 
 

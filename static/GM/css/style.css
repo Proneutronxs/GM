@@ -557,7 +557,7 @@ li {
 	position: relative;
 	font-size: 16px;
 	width: 100%;
-	height: 26px;
+	height: 30px;
 }
 
 /* Estilo del campo cuando está cerrado */
@@ -569,42 +569,28 @@ li {
 	transition: all 0.3s ease;
 	width: 100%;
 	height: 100%;
-    overflow: hidden; /* Evita que el contenido salga del div */
+    overflow: auto; /* Evita que el contenido salga del div */
     white-space: nowrap; /* Evita saltos de línea */
     text-overflow: ellipsis; 
+	max-width: 100%;
 }
 
-/* Sombra en el campo cuando el desplegable está abierto */
 .choices.is-open .choices__inner {
 	border-color: #aaa;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Personalizar el campo de búsqueda */
-.choices__input--cloned {
-	font-size: 14px;
-	padding: 8px;
-	border: none;
-	outline: none;
-	background-color: #f0f0f0;
-	border-radius: 4px;
-	width: 100%;
-}
+
 
 /* Elementos seleccionados */
 .choices__item--selectable {
-	background-color: #f9f9f9;
 	padding: 5px 10px;
-	/* margin: 3px; */
-	border-radius: 4px;
-	border: 1px solid #ddd;
 	font-size: 14px;
-    overflow: hidden; /* Evita que el contenido salga del div */
-    white-space: nowrap; /* Evita saltos de línea */
+    overflow: hidden; 
+    white-space: nowrap; 
     text-overflow: ellipsis; 
 }
 
-/* Estilo del botón para eliminar los ítems seleccionados */
 .choices__item--selectable .choices__button {
 	border: none;
 	background-color: transparent;
@@ -613,7 +599,6 @@ li {
 	cursor: pointer;
 }
 
-/* Contenedor de la lista desplegable */
 .choices__list--dropdown {
 	position: absolute;
 	top: 100%;
@@ -629,7 +614,6 @@ li {
 	transition: all 0.3s ease;
 }
 
-/* Elementos dentro de la lista desplegable */
 .choices__list--dropdown .choices__item--choice {
 	padding: 10px;
 	font-size: 12px;
@@ -639,31 +623,25 @@ li {
 	margin-top: 4px;
 }
 
-/* Hover sobre los ítems de la lista */
 .choices__list--dropdown .choices__item--choice:hover {
 	background-color: #f0f0f0;
 }
 
-/* Ítem seleccionado dentro de la lista */
 .choices__list--dropdown .choices__item--choice.is-highlighted {
 	background-color: #d3e9f8;
 }
 
-/* Cuando no hay resultados en la búsqueda */
 .choices__list--dropdown .choices__item--no-results {
 	padding: 10px;
 	color: #999;
 }
 
-/* Mostrar mensaje de "cargando" cuando se buscan opciones */
 .choices__list--dropdown .choices__item--selectable.choices__item--disabled {
 	font-style: italic;
 	color: #999;
 }
 
-/* Cambiar el ícono del desplegable cuando está abierto o cerrado */
 .choices__inner::after {
-	/* content: '▼'; */
 	position: absolute;
 	top: 50%;
 	right: 15px;
@@ -672,12 +650,10 @@ li {
 	transition: transform 0.3s ease;
 }
 
-/* Rotar el ícono cuando el desplegable está abierto */
 .choices.is-open .choices__inner::after {
 	transform: translateY(-50%) rotate(180deg);
 }
 
-/* El dropdown está oculto por defecto */
 .choices__list--dropdown {
 	position: absolute;
 	width: 100%;
@@ -692,27 +668,97 @@ li {
 	z-index: 999;
 	will-change: visibility;
 	visibility: hidden;
-	/* Oculto por defecto */
 	opacity: 0;
-	/* Hacerlo invisible */
 	transition: visibility 0s, opacity 0.3s ease;
-	/* Transición suave */
 }
 
-/* Mostrar el desplegable cuando está expandido */
 .choices.is-open .choices__list--dropdown {
 	visibility: visible;
-	/* Hacerlo visible */
 	opacity: 1;
-	/* Cambiar la opacidad para mostrarlo */
 	transition-delay: 0s;
-	/* Mostrar de inmediato */
 }
 
 
 
 
 
+
+
+
+
+
+.choices__input--cloned {
+    width: auto !important;
+	padding: 5px 10px;
+	font-size: 14px;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+	border: none;
+}
+
+.choices[data-type*=select-multiple] .choices__inner, .choices[data-type*=text] .choices__inner {
+    cursor: text;
+}
+
+.choices__list--multiple .choices__item[data-deletable] {
+    padding-right: 5px;
+}
+.choices__list--multiple .choices__item {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 3.75px;
+    margin-bottom: 3.75px;
+    background-color: #005f75;
+    border: 1px solid #005f75;
+    color: #fff;
+    word-break: break-all;
+    box-sizing: border-box;
+	margin-top: 1.5px;
+}
+.choices__item--selectable {
+    cursor: pointer;
+}
+.choices[data-type*=select-multiple] .choices__button, .choices[data-type*=text] .choices__button {
+    position: relative;
+    display: inline-block;
+    margin: 1px 0px 0px 0px;
+    padding-left: 16px;
+    border-left: 1px solid #005f75;
+	background-image: url("../../../../static/GM/images/closeBit.png"); /* /home/sides/MAIN_GM/GM/static/GM/images/closeBit.png */
+	background-size: 18px;
+    width: 4px;
+	color: #005f75;
+}
+
+
+
+
+
+.choices__inner::-webkit-scrollbar {
+    width: 4px; /* Ancho de la barra */
+    height: 4px; /* Alto de la barra */
+	cursor: grab;
+}
+
+.choices__inner::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Color de fondo */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.choices__inner::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color de la barra */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.choices__inner::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa; /* Color de la barra al pasar el mouse */
+	cursor: grabbing;
+}
 
 /* #################### CONTAINER PLUS ############################## */
 
@@ -903,7 +949,7 @@ li {
 .vr-datos-tabla {
 	margin-top: 5px;
     overflow-y: auto;
-    height: calc(100% - 10px); 
+    height: calc(100% - 30px); 
 }
 
 

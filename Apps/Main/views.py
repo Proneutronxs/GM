@@ -59,7 +59,7 @@ def dataInicialPlus(request):
                 listado_mercado = []
                 listado_etiqueta = [{'IdEtiqueta': '0', 'Descripcion': 'TODO'}]
                 listado_especie = [{'IdEspecie': '0', 'Descripcion': 'TODO'}]
-                listado_vapor = [{'IdEspecie': '0', 'Descripcion': 'TODO'}]
+                listado_calibres = [{'IdCalibre': '0', 'Calibre': 'TODO'}, {'IdCalibre': '56', 'Calibre': '56'}, {'IdCalibre': '62', 'Calibre': '62'}, {'IdCalibre': '100', 'Calibre': '100'}, {'IdCalibre': '110', 'Calibre': '110'}]
 
                 ## MERCADO
                 sql = """SELECT Nombre, Descripcion FROM Mercado WHERE Nombre NOT IN ('CON','MIN', 'IND')"""
@@ -94,19 +94,11 @@ def dataInicialPlus(request):
                         datos3 = {'IdEspecie': idEspecie, 'Descripcion': nombre}
                         listado_especie.append(datos3)
 
-                sql4 = """SELECT USR_EMBARQUE FROM USR_VAPOR WHERE USR_COD <> 1 ORDER BY USR_EMBARQUE"""
-                cursor.execute(sql4)
-                consulta4 = cursor.fetchall()
-                if consulta4:
-                    for row4 in consulta4:
-                        idVapor = str(row4[0])
-                        nombre = str(row4[0])
-                        datos4 = {'IdVapor': idVapor, 'Descripcion': nombre}
-                        listado_vapor.append(datos4)
+                
                         
 
                 if listado_mercado and listado_etiqueta and listado_especie:
-                    return JsonResponse({'Message': 'Success', 'DataMercado': listado_mercado, 'DataEtiqueta': listado_etiqueta, 'DataEspecie': listado_especie, 'DataVapor': listado_vapor})
+                    return JsonResponse({'Message': 'Success', 'DataMercado': listado_mercado, 'DataEtiqueta': listado_etiqueta, 'DataEspecie': listado_especie, 'DataCalibres': listado_calibres})
                 else:
                     return JsonResponse({'Message': 'Not Found', 'Nota': 'No se pudieron obtener los datos.'})
         except Exception as e:
@@ -180,13 +172,13 @@ def busquedaData(request):
         hasta = request.POST['Final']
         mercado = request.POST['Mercado']
         cliente = request.POST['Cliente']
-        #vapor = request.POST['Vapor']
         especie = request.POST['Especie']
         variedad = request.POST['Variedad']
         envase = request.POST['Envase']
         marca = request.POST['Marca']
+        calibres = request.POST['Calibres']
         url2 = "http://tresasesvpn.ddnsfree.com:8000/api/demo-general/data-general/with-crc/"
-        
+
         datos = {
         "Inicio":desde,
         "Final":hasta,
@@ -195,16 +187,18 @@ def busquedaData(request):
         "Especie":especie,
         "Variedad":variedad,
         "Envase":envase,
-        "Marca":marca
+        "Marca":marca,
+        "Calibres":calibres
         }
         cabeceras = {
 
         }
+        #return JsonResponse({'Message': 'Error', 'Nota': 'Tiempo de espera agotado.'})
         try:
             respuesta = requests.post(url2, json=datos, headers=cabeceras, stream=True, timeout=45)
             respuesta.raise_for_status()  # Lanza una excepción si el código de estado no es 200
 
-            return HttpResponse(respuesta.iter_content(chunk_size=4024), content_type='application/json')
+            return HttpResponse(respuesta.iter_content(chunk_size=10024), content_type='application/json')
 
         except requests.exceptions.Timeout:
             return JsonResponse({'Message': 'Error', 'Nota': 'Tiempo de espera agotado.'})
