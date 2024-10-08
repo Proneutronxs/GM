@@ -379,7 +379,7 @@ function multiplicar(num1, num2) {
 function actualizarFechaDesde(fechaHasta) {
     const fechaHastaDate = new Date(fechaHasta);
     const fechaDesdeDate = new Date(fechaHastaDate);
-    fechaDesdeDate.setMonth(fechaDesdeDate.getMonth() - 4);
+    fechaDesdeDate.setMonth(fechaDesdeDate.getMonth() - 3);
 
     const dia = fechaDesdeDate.getDate();
     const mes = fechaDesdeDate.getMonth() + 1;
@@ -393,7 +393,7 @@ function actualizarFechaDesde(fechaHasta) {
 function actualizarFechaHasta(fechaDesde) {
     const fechaDesdeDate = new Date(fechaDesde);
     const fechaHastaDate = new Date(fechaDesdeDate);
-    fechaHastaDate.setMonth(fechaHastaDate.getMonth() + 4);
+    fechaHastaDate.setMonth(fechaHastaDate.getMonth() + 3);
 
     const dia = fechaHastaDate.getDate();
     const mes = fechaHastaDate.getMonth() + 1;
