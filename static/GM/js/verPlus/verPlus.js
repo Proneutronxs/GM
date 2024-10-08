@@ -21,7 +21,7 @@ selector_mercado.addEventListener("change", (event) => {
     document.getElementById('id-contenedor-empresas').innerHTML = ``;
     document.getElementById('id-vr-datos-totales').innerHTML = ``;
     const IdElemento = document.getElementById("selector_mercado").value;
-    dataSubItems('CLI',IdElemento,'SELECCIONE CLIENTE');
+    dataSubItems('CLI', IdElemento, 'SELECCIONE CLIENTE');
 });
 
 selector_cliente.addEventListener("change", (event) => {
@@ -33,7 +33,7 @@ selector_especie.addEventListener("change", (event) => {
     document.getElementById('id-contenedor-empresas').innerHTML = ``;
     document.getElementById('id-vr-datos-totales').innerHTML = ``;
     const IdElemento = document.getElementById("selector_especie").value;
-    dataSubItems('VAR',IdElemento,'SELECCIONE VARIEDAD');
+    dataSubItems('VAR', IdElemento, 'SELECCIONE VARIEDAD');
 });
 
 selector_variedad.addEventListener("change", (event) => {
@@ -156,7 +156,7 @@ const listarDataInicial = async () => {
             let result3 = [];
             result3.push();
             data.DataCalibres.forEach((datos) => {
-                result3.push({ value: datos.IdCalibre, label: datos.Calibre});
+                result3.push({ value: datos.IdCalibre, label: datos.Calibre });
             });
             choiceCalibre.setChoices(result3, 'value', 'label', true);
         } else {
@@ -171,10 +171,10 @@ const listarDataInicial = async () => {
     }
 }
 
-const dataSubItems = async (Tipo,IdElemento) => {
+const dataSubItems = async (Tipo, IdElemento) => {
     try {
         const formData = new FormData();
-        
+
         formData.append("Tipo", Tipo);
         formData.append("IdElemento", IdElemento);
         const options = {
@@ -187,7 +187,7 @@ const dataSubItems = async (Tipo,IdElemento) => {
         const response = await fetch("data-especifica/", options);
         const data = await response.json();
         if (data.Message == "Success") {
-            if (Tipo == 'VAR'){
+            if (Tipo == 'VAR') {
                 let result = [];
                 result.push();
                 data.DataListado.forEach((datos) => {
@@ -206,7 +206,7 @@ const dataSubItems = async (Tipo,IdElemento) => {
                 choiceEnvase.removeActiveItems();
                 choiceEnvase.setChoices(result2, 'value', 'label', true);
             }
-            if (Tipo == 'CLI'){
+            if (Tipo == 'CLI') {
                 let result = [];
                 result.push();
                 data.DataListado.forEach((datos) => {
@@ -250,6 +250,8 @@ const buscarCRC = async () => {
 
         const response = await fetch("data-busqueda/", options);
         const data = await response.json();
+        document.getElementById('id-contenedor-empresas').innerHTML = ``;
+        document.getElementById('id-vr-datos-totales').innerHTML = ``;
         closeLoading();
         if (data.Message == "Success") {
             data.Empresas.forEach((empresa) => {
@@ -285,7 +287,7 @@ const buscarCRC = async () => {
                     </table>
                 `;
                 document.getElementById('id-contenedor-empresas').innerHTML += tablaEmpresa;
-                empresa.Datos.forEach((dato) => {                    
+                empresa.Datos.forEach((dato) => {
                     const filaTabla = `
                         <tr>
                             <td>${dato.FechaFac}</td>
@@ -296,8 +298,8 @@ const buscarCRC = async () => {
                             <td>${dato.Calibre}</td>
                             <td>${dato.Cantidad}</td>
                             <td>${formatoMonedaTexto(dato.ImporteUnitario)}</td>
-                            <td>${formatoMonedaTexto((multiplicar(dato.CRC,dato.Cantidad)).toString())}</td>
-                            <td>${formatoMonedaTexto((multiplicar(dato.Cantidad,dato.ImporteUnitario)).toString())}</td>
+                            <td>${formatoMonedaTexto((multiplicar(dato.CRC, dato.Cantidad)).toString())}</td>
+                            <td>${formatoMonedaTexto((multiplicar(dato.Cantidad, dato.ImporteUnitario)).toString())}</td>
                         </tr>
                     `;
                     document.getElementById(`id-tbody-${empresa.Nombre}`).innerHTML += filaTabla;
@@ -305,7 +307,7 @@ const buscarCRC = async () => {
             });
 
 
-            let datosTotales= `
+            let datosTotales = `
                 <div class="vr-datos-encabezado-item vr-datos-crc">
                     <strong>CRC Total: </strong>${data.Resumen.SumaImporteCRCTotal}
                 </div>
@@ -367,7 +369,7 @@ function getValueCalibres() {
 function formatoMonedaTexto(texto) {
     const num = parseFloat(texto.replace(/[^0-9.-]/g, ''));
     if (isNaN(num)) {
-      return '-';
+        return '-';
     }
     return `U$S ${num.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
@@ -404,12 +406,12 @@ function actualizarFechaHasta(fechaDesde) {
     document.getElementById("vr-fecha-hasta").value = fechaHasta;
 }
 
-document.getElementById("vr-fecha-desde").addEventListener("change", function() {
+document.getElementById("vr-fecha-desde").addEventListener("change", function () {
     const fechaDesde = document.getElementById("vr-fecha-desde").value;
     actualizarFechaHasta(fechaDesde);
 });
 
-document.getElementById("vr-fecha-hasta").addEventListener("change", function() {
+document.getElementById("vr-fecha-hasta").addEventListener("change", function () {
     const fechaHasta = document.getElementById("vr-fecha-hasta").value;
     actualizarFechaDesde(fechaHasta);
 });
@@ -459,7 +461,7 @@ function fechaActual() {
     hasta.value = formattedDate;
 }
 
-function mostrarInfo(Message,Color) {
+function mostrarInfo(Message, Color) {
     document.getElementById("popup").classList.add("active");
     const colorBorderMsg = document.getElementById("popup");
     const mensaje = document.getElementById("mensaje-pop-up");
