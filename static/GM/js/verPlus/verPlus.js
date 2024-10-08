@@ -376,8 +376,43 @@ function multiplicar(num1, num2) {
     return num1 * num2;
 }
 
+function actualizarFechaDesde(fechaHasta) {
+    const fechaHastaDate = new Date(fechaHasta);
+    const fechaDesdeDate = new Date(fechaHastaDate);
+    fechaDesdeDate.setMonth(fechaDesdeDate.getMonth() - 4);
 
+    const dia = fechaDesdeDate.getDate();
+    const mes = fechaDesdeDate.getMonth() + 1;
+    const anio = fechaDesdeDate.getFullYear();
 
+    const fechaDesde = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+    document.getElementById("vr-fecha-desde").value = fechaDesde;
+}
+
+function actualizarFechaHasta(fechaDesde) {
+    const fechaDesdeDate = new Date(fechaDesde);
+    const fechaHastaDate = new Date(fechaDesdeDate);
+    fechaHastaDate.setMonth(fechaHastaDate.getMonth() + 4);
+
+    const dia = fechaHastaDate.getDate();
+    const mes = fechaHastaDate.getMonth() + 1;
+    const anio = fechaHastaDate.getFullYear();
+
+    const fechaHasta = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+    document.getElementById("vr-fecha-hasta").value = fechaHasta;
+}
+
+document.getElementById("vr-fecha-desde").addEventListener("change", function() {
+    const fechaDesde = document.getElementById("vr-fecha-desde").value;
+    actualizarFechaHasta(fechaDesde);
+});
+
+document.getElementById("vr-fecha-hasta").addEventListener("change", function() {
+    const fechaHasta = document.getElementById("vr-fecha-hasta").value;
+    actualizarFechaDesde(fechaHasta);
+});
 
 
 
