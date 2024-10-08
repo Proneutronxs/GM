@@ -59,7 +59,7 @@ def dataInicialPlus(request):
                 listado_mercado = []
                 listado_etiqueta = [{'IdEtiqueta': '0', 'Descripcion': 'TODO'}]
                 listado_especie = [{'IdEspecie': '0', 'Descripcion': 'TODO'}]
-                listado_calibres = [{'IdCalibre': '0', 'Calibre': 'TODO'}, {'IdCalibre': '56', 'Calibre': '56'}, {'IdCalibre': '62', 'Calibre': '62'}, {'IdCalibre': '100', 'Calibre': '100'}, {'IdCalibre': '110', 'Calibre': '110'}]
+                listado_calibres = [{'IdCalibre': '0', 'Calibre': 'TODO'}]
 
                 ## MERCADO
                 sql = """SELECT Nombre, Descripcion FROM Mercado WHERE Nombre NOT IN ('CON','MIN', 'IND')"""
@@ -94,8 +94,19 @@ def dataInicialPlus(request):
                         datos3 = {'IdEspecie': idEspecie, 'Descripcion': nombre}
                         listado_especie.append(datos3)
 
-                
-                        
+                sql4 = """SELECT TRIM(LEADING '0' FROM USR_DES) AS ID, TRIM(LEADING '0' FROM USR_DES) AS CALIBRE 
+                        FROM `USR_CALIBRE` 
+                        WHERE USR_DES NOT IN ('000','1/2','GENERICO','SAF') 
+                        ORDER BY USR_DES;"""
+                cursor.execute(sql4)
+                consulta4 = cursor.fetchall()
+                if consulta4:
+                    for row4 in consulta4:
+                        idCalibre = str(row4[0])
+                        calibre = str(row4[1])
+                        datos4 = {'IdCalibre': idCalibre, 'Calibre': calibre}
+                        listado_calibres.append(datos4)
+
 
                 if listado_mercado and listado_etiqueta and listado_especie:
                     return JsonResponse({'Message': 'Success', 'DataMercado': listado_mercado, 'DataEtiqueta': listado_etiqueta, 'DataEspecie': listado_especie, 'DataCalibres': listado_calibres})

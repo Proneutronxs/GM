@@ -19,7 +19,7 @@ from Apps.Main import views
 from django.contrib.auth.views import logout_then_login
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('site-administrador/gm-crc/', admin.site.urls),
 
     path('', include('Apps.Main.urls')),
 
