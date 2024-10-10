@@ -380,30 +380,49 @@ function multiplicar(num1, num2) {
 
 function actualizarFechaDesde(fechaHasta) {
     const fechaHastaDate = new Date(fechaHasta);
-    const fechaDesdeDate = new Date(fechaHastaDate);
-    fechaDesdeDate.setMonth(fechaDesdeDate.getMonth() - 3);
+    const fechaDesdeDate = new Date(document.getElementById("vr-fecha-desde").value);
 
-    const dia = fechaDesdeDate.getDate();
-    const mes = fechaDesdeDate.getMonth() + 1;
-    const anio = fechaDesdeDate.getFullYear();
+    const diferenciaMeses = diferenciaEnMeses(fechaDesdeDate, fechaHastaDate);
 
-    const fechaDesde = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+    if (diferenciaMeses > 3) {
+        const nuevaFecha = new Date(fechaHastaDate.getFullYear(), fechaHastaDate.getMonth() - 3, fechaHastaDate.getDate());
 
-    document.getElementById("vr-fecha-desde").value = fechaDesde;
+        const dia = nuevaFecha.getDate();
+        const mes = nuevaFecha.getMonth() + 1;
+        const anio = nuevaFecha.getFullYear();
+
+        const fechaDesde = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+        document.getElementById("vr-fecha-desde").value = fechaDesde;
+    } else {
+        // No hacer nada 
+    }
 }
 
 function actualizarFechaHasta(fechaDesde) {
     const fechaDesdeDate = new Date(fechaDesde);
-    const fechaHastaDate = new Date(fechaDesdeDate);
-    fechaHastaDate.setMonth(fechaHastaDate.getMonth() + 3);
+    const fechaHastaDate = new Date(document.getElementById("vr-fecha-hasta").value);
 
-    const dia = fechaHastaDate.getDate();
-    const mes = fechaHastaDate.getMonth() + 1;
-    const anio = fechaHastaDate.getFullYear();
+    const diferenciaMeses = diferenciaEnMeses(fechaDesdeDate, fechaHastaDate);
 
-    const fechaHasta = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+    if (diferenciaMeses > 3) {
+        const nuevaFecha = new Date(fechaDesdeDate.getFullYear(), fechaDesdeDate.getMonth() + 3, fechaDesdeDate.getDate());
 
-    document.getElementById("vr-fecha-hasta").value = fechaHasta;
+        const dia = nuevaFecha.getDate();
+        const mes = nuevaFecha.getMonth() + 1;
+        const anio = nuevaFecha.getFullYear();
+
+        const fechaHasta = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+        document.getElementById("vr-fecha-hasta").value = fechaHasta;
+    } else {
+        // No hacer nada 
+    }
+}
+
+function diferenciaEnMeses(fecha1, fecha2) {
+    const meses = Math.abs((fecha2.getFullYear() - fecha1.getFullYear()) * 12 + fecha2.getMonth() - fecha1.getMonth());
+    return meses;
 }
 
 document.getElementById("vr-fecha-desde").addEventListener("change", function () {
@@ -415,38 +434,6 @@ document.getElementById("vr-fecha-hasta").addEventListener("change", function ()
     const fechaHasta = document.getElementById("vr-fecha-hasta").value;
     actualizarFechaDesde(fechaHasta);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function fechaActual() {
     var fecha = new Date();
@@ -480,110 +467,3 @@ function openLoading() {
 function closeLoading() {
     loadingContainer.style.display = 'none';
 }
-
-
-// const divMovible = document.querySelector('.div-movible');
-// let posicionX = 0;
-// let posicionY = 0;
-// let mouseDown = false;
-
-// divMovible.addEventListener('mousedown', (e) => {
-//     mouseDown = true;
-//     posicionX = e.clientX;
-//     posicionY = e.clientY;
-// });
-
-// document.addEventListener('mousemove', (e) => {
-//     if (mouseDown) {
-//         const dx = e.clientX - posicionX;
-//         const dy = e.clientY - posicionY;
-//         divMovible.style.top = `${divMovible.offsetTop + dy}px`;
-//         divMovible.style.left = `${divMovible.offsetLeft + dx}px`;
-//         posicionX = e.clientX;
-//         posicionY = e.clientY;
-//     }
-// });
-
-// document.addEventListener('mouseup', () => {
-//     mouseDown = false;
-// });
-
-/* <div class="div-movible"
-        style="background-color: black; width: 350px; height: 350px; position: absolute; top: 0; left: 0; cursor: move;">
-</div> */
-
-
-
-
-// const llenarTablaAdicionales = async () => {
-//     showSpinner();
-//     try {
-//         const formData = new FormData();
-//         formData.append("Inicio", inicio.value);
-//         formData.append("Final", final.value);
-//         formData.append("Centro", centro.value);
-//         formData.append("Legajo", legajo.value);
-//         formData.append("Concepto", concepto.value);
-//         formData.append("Estado", estado.value);
-//         const options = {
-//             method: 'POST',
-//             headers: {
-//             },
-//             body: formData
-//         };
-
-//         const response = await fetch("llenar-tabla-adicional/", options);
-//         const data = await response.json();
-//         if (data.Message == "Success") {
-//             let dato = ``;
-//             data.Datos.forEach((datos) => {
-//                 dato += `
-//                 <tr>
-//                     <td class="fila-legajo">${datos.Legajo}</td>
-//                     <td class="fila-nombres">${datos.Nombre}</td>
-//                     <td class="fila-centro">${datos.Abrev2}</td>
-//                     <td class="fila-concepto">${datos.Concepto}</td>
-//                     <td class="fila-fecha">${datos.Fecha}</td>
-//                     <td class="fila-importe">$ ${datos.Importe}</td>
-//                     <td class="fila-estado">
-//                         <div class="estado" style="background-color: ${datos.Color};">${datos.Estado}</div>
-//                     </td>
-//                     <td class="fila-alta">${datos.Alta}</td>
-//                     <td class="fila-usuario">${datos.Usuario}</td>
-//                     <td class="fila-opciones">
-//                         <button class="btn-icon edit-btn" onclick="activo(${datos.IdAdicional});" ${datos.IdEstado === 'L' || datos.IdEstado === 'A' ? 'disabled' : ''}>
-//                             <i class="fas fa-edit" style="${datos.IdEstado !== 'P' ? 'color: grey;' : ''}"></i>
-//                         </button>
-//                         <button class="btn-icon delete-btn" onclick="mostrarPopupEliminacion(${datos.IdAdicional});" ${datos.IdEstado === 'L' || datos.IdEstado === 'A' ? 'disabled' : ''}>
-//                             <i class="fas fa-trash-alt" style="${datos.IdEstado !== 'P' ? 'color: grey;' : ''}"></i>
-//                         </button>
-//                     </td>
-//                 </tr>
-//                 `
-//             });
-//             detallesAdcionales.style.backgroundColor = data.Color;
-//             if (data.Color == "orange"){
-//                 detallesAdcionales.style.color = 'black';
-//             }else {
-//                 detallesAdcionales.style.color = 'white';
-//             }
-//             detallesAdcionales.innerHTML = `<div>Cant.: ${data.Cantidad}  -  Importe Total: ${data.Total}</div>`;
-//             document.getElementById('listado-tabla-adicionales').innerHTML = dato;
-//             hideSpinner();
-//         } else {
-//             hideSpinner();
-//             document.getElementById('listado-tabla-adicionales').innerHTML = ``;
-//             detallesAdcionales.style.color = 'white';
-//             detallesAdcionales.style.backgroundColor = 'white';
-//             detallesAdcionales.innerHTML = `<div>*</div>`;
-//             var nota = data.Nota
-//             var color = "red";
-//             mostrarInfo(nota, color);
-//         }
-//     } catch (error) {
-//         hideSpinner();
-//         var nota = "Se produjo un error al procesar la solicitud. "  + error;
-//         var color = "red";
-//         mostrarInfo(nota, color);
-//     }
-// };
