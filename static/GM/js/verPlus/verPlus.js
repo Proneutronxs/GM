@@ -297,9 +297,9 @@ const buscarCRC = async () => {
                             <td>${dato.Marca}</td>
                             <td>${dato.Calibre}</td>
                             <td>${dato.Cantidad}</td>
-                            <td>${formatoMonedaTexto(dato.ImporteUnitario)}</td>
-                            <td>${formatoMonedaTexto((multiplicar(dato.CRC, dato.Cantidad)).toString())}</td>
-                            <td>${formatoMonedaTexto((multiplicar(dato.Cantidad, dato.ImporteUnitario)).toString())}</td>
+                            <td>${formatoMonedaTexto(dato.Moneda,dato.ImporteUnitario)}</td>
+                            <td>${formatoMonedaTexto(dato.Moneda,(multiplicar(dato.CRC, dato.Cantidad)).toString())}</td>
+                            <td>${formatoMonedaTexto(dato.Moneda,(multiplicar(dato.Cantidad, dato.ImporteUnitario)).toString())}</td>
                         </tr>
                     `;
                     document.getElementById(`id-tbody-${empresa.Nombre}`).innerHTML += filaTabla;
@@ -366,12 +366,12 @@ function getValueCalibres() {
     return selectedCalibres;
 }
 
-function formatoMonedaTexto(texto) {
+function formatoMonedaTexto(moneda,texto) {
     const num = parseFloat(texto.replace(/[^0-9.-]/g, ''));
     if (isNaN(num)) {
         return '-';
     }
-    return `U$S ${num.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return moneda +` ${num.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function multiplicar(num1, num2) {

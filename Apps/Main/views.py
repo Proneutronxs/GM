@@ -62,7 +62,7 @@ def dataInicialPlus(request):
                 listado_calibres = [{'IdCalibre': '0', 'Calibre': 'TODO'}]
 
                 ## MERCADO
-                sql = """SELECT Nombre, Descripcion FROM Mercado WHERE Nombre NOT IN ('CON','MIN', 'IND')"""
+                sql = """SELECT Nombre, Descripcion FROM Mercado WHERE Nombre NOT IN ('CON', 'IND')"""
                 cursor.execute(sql)
                 consulta = cursor.fetchall()
                 if consulta:
