@@ -261,7 +261,7 @@ const buscarCRC = async () => {
                             ${empresa.Nombre}
                         </div>
                         <div class="vr-tb-summary">
-                            SubCRC: ${empresa.Subtotal.SumaImporteCRCTotal} - SubTotal: ${empresa.Subtotal.SumaImporteTotal} - Total: ${empresa.Subtotal.TotalGeneral}
+                            Cant. Bultos: ${empresa.Subtotal.Bultos} - SubCRC: ${empresa.Subtotal.SumaImporteCRCTotal} - SubTotal: ${empresa.Subtotal.SumaImporteTotal} - Total: ${empresa.Subtotal.TotalGeneral}
                         </div>
                     </div>
                 `;
@@ -308,6 +308,9 @@ const buscarCRC = async () => {
 
 
             let datosTotales = `
+                <div class="vr-datos-encabezado-item vr-datos-crc">
+                    <strong>Cant. Total Bultos: </strong>${data.Resumen.Bultos}
+                </div>
                 <div class="vr-datos-encabezado-item vr-datos-crc">
                     <strong>CRC Total: </strong>${data.Resumen.SumaImporteCRCTotal}
                 </div>

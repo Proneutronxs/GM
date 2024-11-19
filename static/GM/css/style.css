@@ -678,15 +678,6 @@ li {
 	transition-delay: 0s;
 }
 
-
-
-
-
-
-
-
-
-
 .choices__input--cloned {
     width: auto !important;
 	padding: 5px 10px;
@@ -729,15 +720,11 @@ li {
     margin: 1px 0px 0px 0px;
     padding-left: 16px;
     border-left: 1px solid #005f75;
-	background-image: url("../../../../static/GM/images/closeBit.png"); /* /home/sides/MAIN_GM/GM/static/GM/images/closeBit.png */
+	background-image: url("../../../../static/GM/images/closeBit.png"); 
 	background-size: 18px;
     width: 4px;
 	color: #005f75;
 }
-
-
-
-
 
 .choices__inner::-webkit-scrollbar {
     width: 4px; /* Ancho de la barra */

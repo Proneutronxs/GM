@@ -50,7 +50,7 @@ def custom_login(request):
 
 
 #Petición datos iniciales:
-
+@login_required
 def dataInicialPlus(request):
     if request.method == 'GET':
         try:
@@ -120,7 +120,8 @@ def dataInicialPlus(request):
             connections['GM'].close()
     else:
         return JsonResponse({'Message': 'No se pudo resolver la petición.'})
-    
+
+@login_required
 @csrf_exempt
 def dataSubItems(request):
     if request.method == 'POST':
@@ -175,7 +176,7 @@ def dataSubItems(request):
     else:
         return JsonResponse({'Message': 'No se pudo resolver la petición.'})
     
-
+@login_required
 @csrf_exempt
 def busquedaData(request):
     if request.method == 'POST':
@@ -204,7 +205,6 @@ def busquedaData(request):
         cabeceras = {
 
         }
-        #return JsonResponse({'Message': 'Error', 'Nota': 'Tiempo de espera agotado.'})
         try:
             respuesta = requests.post(url2, json=datos, headers=cabeceras, stream=True, timeout=45)
             respuesta.raise_for_status()  # Lanza una excepción si el código de estado no es 200
